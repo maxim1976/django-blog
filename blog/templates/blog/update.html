@@ -1,0 +1,25 @@
+{% extends "blog/base.html" %}
+{% block title %}Update Post{% endblock title %}
+{% load static %}
+
+{% block page_content %}
+{% if user.is_authenticated %}
+    {% if user.id == post.author.id %}
+        <div class="container">    
+            <h1 class="display-4">Edit Post</h1>
+            <div class="form-group">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.media }}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-success">Update</button>
+                </form>
+            </div>
+        </div>
+    {% else %}
+        <div class="container">
+            <h1 class="display-4">You are not authorized to update this post.</h1>
+        </div>
+    {% endif %}
+{% endif %}
+{% endblock page_content %}

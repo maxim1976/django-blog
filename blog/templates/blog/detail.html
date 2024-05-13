@@ -1,0 +1,52 @@
+<!--  blog/templates/blog/detail.html -->
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block page_content %}
+<div class="container">
+    <article class="blog-post">
+        <h3 class="blog-post-title text-center">{{ post.title }}</h3>
+        <br>
+        <div class="clearfix">
+            {% if post.featured_image %}
+                <img class='col-md-2 float-md-end mb-4 ms-md-4' width="200" height="250" src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+            {% else %}
+                <!-- Display a placeholder image or nothing -->
+            {% endif %}
+            
+            <small>
+                <p class="blog-post-meta">
+                    {{ post.created_on.date }} - By <a href="#">{{ post.author }}</a>
+                </p>
+                {% if user.is_authenticated %}
+                    {% if user.id == post.author.id %}
+                    <p class="blog-post-meta">
+                            <a href="{% url 'update_post' post.pk %}">Edit</a> - 
+                            
+                            <a href="{% url 'delete_post' post.pk %}">Delete</a>
+                    {% endif %}
+                </p>
+                {% endif %}
+            </small>
+                Categories:
+                {% for category in post.categories.all %}
+                    <a href="{% url 'blog_category' category.name %}">
+                        {{ category.name }}
+                    </a>
+                {% endfor %}
+            </small>
+            
+            <div class="text-start">            
+                <p class="fs-4 fw-bold">{{ post.body | safe }}</p>
+            </div>
+        </div>
+        <hr>
+        <p class="text-center">
+            <a href="{% url 'blog_index' %}">Dedir kol arynche</a>
+        </p>
+    </article>
+</div>
+
+
+{% endblock page_content %}
+
