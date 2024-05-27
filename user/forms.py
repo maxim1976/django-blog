@@ -1,10 +1,12 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from django_recaptcha.fields import ReCaptchaField
 
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    captcha = ReCaptchaField()
 
     class Meta:
         model = User

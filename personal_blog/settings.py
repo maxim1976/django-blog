@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'bootstrap5',
     'user.apps.UserConfig',
     'ckeditor',
+    'django_recaptcha',
 ]
 
 MIDDLEWARE = [
@@ -142,3 +143,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'blog_index'
 LOGOUT_REDIRECT_URL = 'blog_index'
+
+RECAPTCHA_PUBLIC_KEY = '6LeGueYpAAAAAMMMnHy6DURgEotFTIuTZTw0wwOE'
+RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY')
