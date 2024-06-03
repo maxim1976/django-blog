@@ -127,12 +127,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Ensure this path is correct
 
-STATIC_URL = 'static/'
+# Additional locations of static files
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),  # Ensure this path is correct
+]
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
 
 
 # Default primary key field type
@@ -144,5 +147,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'blog_index'
 LOGOUT_REDIRECT_URL = 'blog_index'
 
-RECAPTCHA_PUBLIC_KEY = '6LeGueYpAAAAAMMMnHy6DURgEotFTIuTZTw0wwOE'
+RECAPTCHA_PUBLIC_KEY = '6Lc7cu8pAAAAAFcWahxkV8uvUAo84pu7M2C1Ewrs'
 RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY')
