@@ -7,7 +7,7 @@ class CategoryAdmin(admin.ModelAdmin):
     pass
 
 class PostAdmin(admin.ModelAdmin):
-    pass
+    fields = ('title', 'intro', 'body', 'is_published', 'is_featured', 'is_first', 'featured_image', 'categories', 'author')
 
 class CommentAdmin(admin.ModelAdmin):
     pass

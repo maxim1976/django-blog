@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'ckeditor',
     'django_recaptcha',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -136,6 +137,27 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),  # Ensure this path is correct
 ]
 
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+
+AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_FILE_OVERWRITE = False
+
+STORAGES = {
+    'default': {
+        'BACKEND': 'storages.backends.s3boto3.S3Boto3Storage',
+        'bucket_name': AWS_STORAGE_BUCKET_NAME,
+    },
+    'staticfiles': {
+        'BACKEND': 'storages.backends.s3boto3.S3Boto3Storage',
+        'location': 'staticfiles',
+    },
+    'mediafiles': {
+        'BACKEND': 'storages.backends.s3boto3.S3Boto3Storage',
+        'location': 'mediafiles',
+    },
+}
 
 
 # Default primary key field type
@@ -147,5 +169,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'blog_index'
 LOGOUT_REDIRECT_URL = 'blog_index'
 
-RECAPTCHA_PUBLIC_KEY = '6Lc7cu8pAAAAAFcWahxkV8uvUAo84pu7M2C1Ewrs'
+RECAPTCHA_PUBLIC_KEY = '6LeCPvYpAAAAAEKGQNkrGuq-KnrWuHQTKGR7hnWI'
 RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY')
